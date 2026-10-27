@@ -1,0 +1,3 @@
+Apache 2.0 TRAEAI Write
+
+you can have a copy from https://apache.org/licenses/LICENSE-2.0
