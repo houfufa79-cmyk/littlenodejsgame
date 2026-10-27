@@ -1,0 +1,11 @@
+{
+  "name": "lose-weight-shooter",
+  "version": "1.0.0",
+  "description": "减肥八法小游戏：射击运动图标，消灭鸡腿塔！",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "build": "node build.js"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,146 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  background: radial-gradient(circle at 50% 30%, #2c5364, #203a43, #0f2027);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#gameWrap {
+  position: relative;
+  width: min(96vw, 62vh);
+  aspect-ratio: 480 / 720;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, .55);
+}
+
+#game {
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+  cursor: crosshair;
+}
+
+/* ---------- HUD ---------- */
+#hud {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 12px;
+  font-size: clamp(12px, 2.6vw, 15px);
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+  pointer-events: none;
+}
+.hud-item {
+  background: rgba(0, 0, 0, .35);
+  border-radius: 999px;
+  padding: 4px 10px;
+  backdrop-filter: blur(4px);
+  white-space: nowrap;
+}
+.hud-item b { color: #ffd54f; }
+#nextBubble {
+  display: inline-block;
+  background: #fff;
+  border-radius: 50%;
+  width: 1.7em; height: 1.7em;
+  line-height: 1.7em;
+  text-align: center;
+  font-size: 1.05em;
+  vertical-align: middle;
+  text-shadow: none;
+}
+
+/* ---------- Toast ---------- */
+#toast {
+  position: absolute;
+  top: 22%; left: 50%;
+  transform: translateX(-50%);
+  font-size: clamp(20px, 5vw, 30px);
+  font-weight: 700;
+  color: #ffd54f;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, .6);
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+}
+#toast.show { animation: toastAnim 1.6s ease forwards; }
+@keyframes toastAnim {
+  0% { opacity: 0; transform: translateX(-50%) scale(.6); }
+  15% { opacity: 1; transform: translateX(-50%) scale(1.1); }
+  25% { transform: translateX(-50%) scale(1); }
+  75% { opacity: 1; }
+  100% { opacity: 0; transform: translateX(-50%) translateY(-16px); }
+}
+
+/* ---------- 覆盖层 ---------- */
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: rgba(10, 25, 35, .82);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  text-align: center;
+  padding: 24px;
+}
+.overlay.show { display: flex; }
+.overlay h1 { font-size: clamp(24px, 6vw, 36px); color: #ffd54f; }
+.overlay .sub { font-size: clamp(14px, 3.4vw, 18px); opacity: .92; }
+.overlay .sub b { color: #ffd54f; }
+
+.sports-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  max-width: 340px;
+}
+.sports-list span {
+  background: rgba(255, 255, 255, .12);
+  border: 1px solid rgba(255, 255, 255, .25);
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: clamp(12px, 3vw, 15px);
+}
+
+.tips {
+  font-size: clamp(12px, 3vw, 14px);
+  line-height: 1.9;
+  opacity: .85;
+}
+
+.btn {
+  margin-top: 6px;
+  font-size: clamp(16px, 4vw, 20px);
+  font-weight: 700;
+  color: #4e2c00;
+  background: linear-gradient(180deg, #ffd54f, #ffb300);
+  border: none;
+  border-radius: 999px;
+  padding: 12px 44px;
+  cursor: pointer;
+  box-shadow: 0 6px 0 #c17900, 0 10px 20px rgba(0, 0, 0, .4);
+  transition: transform .08s, box-shadow .08s;
+}
+.btn:hover { filter: brightness(1.05); }
+.btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 #c17900, 0 4px 10px rgba(0, 0, 0, .4);
+}

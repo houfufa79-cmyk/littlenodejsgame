@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>减肥八法大作战</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="gameWrap">
+    <canvas id="game"></canvas>
+
+    <!-- 顶部 HUD -->
+    <div id="hud">
+      <div class="hud-item">关卡 <b id="hudLevel">1</b></div>
+      <div class="hud-item">🔥 <b id="hudScore">0</b> kcal</div>
+      <div class="hud-item">🍗 剩 <b id="hudLeft">0</b></div>
+      <div class="hud-item next-box">下一个 <span id="nextBubble">🚶</span></div>
+    </div>
+
+    <!-- 关卡提示 toast -->
+    <div id="toast"></div>
+
+    <!-- 开始界面 -->
+    <div id="startScr" class="overlay show">
+      <h1>减肥八法大作战</h1>
+      <p class="sub">运动六法出击，消灭鸡腿塔！</p>
+      <div class="sports-list">
+        <span>🚶 走路</span><span>🏊 游泳</span><span>🪢 跳绳</span>
+        <span>🏓 乒乓球</span><span>🏀 篮球</span><span>🏸 羽毛球</span>
+      </div>
+      <div class="tips">
+        <p>🎯 移动鼠标 / 手指瞄准，点击射击</p>
+        <p>🏀 篮球命中可范围燃脂（溅射伤害）</p>
+        <p>⚠️ 鸡腿塔会不断下降，别让它们压到红线！</p>
+      </div>
+      <button id="startBtn" class="btn">开始燃脂</button>
+    </div>
+
+    <!-- 结束界面 -->
+    <div id="overScr" class="overlay">
+      <h1>🍗 鸡腿攻陷了阵地！</h1>
+      <p class="sub">本次燃脂 <b id="finalScore">0</b> kcal</p>
+      <p class="sub">历史最佳 <b id="bestScore">0</b> kcal</p>
+      <button id="restartBtn" class="btn">再战一局</button>
+    </div>
+  </div>
+
+<script src="game.js"></script>
+</body>
+</html>
