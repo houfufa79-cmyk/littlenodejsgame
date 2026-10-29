@@ -13,7 +13,7 @@
 3.界面
 
 
-
+![interface](减肥八法.jpg)
 
 
 4.生成代码
@@ -26,6 +26,6 @@ LittleNodejsGame.zip (27.5 KB)
 
 zhihu:
 
-
+trae log: 【减肥八法射击小游戏开发 - TRAE】https://share.traecontent.cn/share/ESY9FEFQRB5RI4?enter_from=pc
 
 apache 2.0
