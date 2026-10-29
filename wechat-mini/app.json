@@ -1,0 +1,13 @@
+{
+  "pages": ["pages/index/index"],
+  "window": {
+    "navigationBarTitleText": "减肥八法大作战",
+    "navigationBarBackgroundColor": "#203a43",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#0f2027",
+    "disableScroll": true,
+    "pageOrientation": "portrait"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

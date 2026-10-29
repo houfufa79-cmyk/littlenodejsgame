@@ -1,0 +1,58 @@
+<!-- 减肥八法大作战 — 微信小程序版 -->
+<view class="wrap">
+  <!-- 主画布 -->
+  <canvas
+    type="2d"
+    id="game"
+    class="game-canvas"
+    disable-scroll="true"
+    bindtouchstart="onTouchStart"
+    bindtouchmove="onTouchMove"
+    bindtouchend="onTouchEnd"
+    bindtouchcancel="onTouchEnd"
+  />
+
+  <!-- 顶部 HUD -->
+  <view class="hud" wx:if="{{ state === 'playing' }}">
+    <view class="hud-item">关卡 <text class="hud-num">{{ hudLevel }}</text></view>
+    <view class="hud-item">🔥 <text class="hud-num">{{ hudScore }}</text> kcal</view>
+    <view class="hud-item">🍗 剩 <text class="hud-num">{{ hudLeft }}</text></view>
+    <view class="hud-item next-box">下一个 <text class="next-bubble">{{ nextEmoji }}</text></view>
+  </view>
+
+  <!-- 关卡提示 toast -->
+  <view class="toast {{ toastShow ? 'show' : '' }}" wx:if="{{ toastText }}">{{ toastText }}</view>
+
+  <!-- 开始界面 -->
+  <view class="overlay show" wx:if="{{ state === 'start' }}">
+    <view class="overlay-card">
+      <view class="title">减肥八法大作战</view>
+      <view class="sub">运动六法出击 · 消灭鸡腿塔</view>
+      <view class="sports">
+        <view class="s-item">🚶 走路</view>
+        <view class="s-item">🏊 游泳</view>
+        <view class="s-item">🪢 跳绳</view>
+        <view class="s-item">🏓 乒乓球</view>
+        <view class="s-item">🏀 篮球</view>
+        <view class="s-item">🏸 羽毛球</view>
+      </view>
+      <view class="tips">
+        <view>🎯 手指瞄准 · 松开发射</view>
+        <view>🏀 篮球带「燃脂爆发」溅射伤害</view>
+        <view>⚠️ 别让鸡腿塔压到红线！</view>
+      </view>
+      <button class="btn btn-start" bindtap="onStart">开始燃脂</button>
+      <view class="best" wx:if="{{ best > 0 }}">历史最佳：{{ best }} kcal</view>
+    </view>
+  </view>
+
+  <!-- 结束界面 -->
+  <view class="overlay show" wx:if="{{ state === 'gameover' }}">
+    <view class="overlay-card">
+      <view class="title over">🍗 鸡腿攻陷了阵地！</view>
+      <view class="sub">本次燃脂 <text class="hl">{{ hudScore }}</text> kcal</view>
+      <view class="sub">历史最佳 <text class="hl">{{ best }}</text> kcal</view>
+      <button class="btn btn-start" bindtap="onRestart">再战一局</button>
+    </view>
+  </view>
+</view>

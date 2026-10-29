@@ -1,0 +1,9 @@
+/* 全局样式（本项目主样式均在 page/index.wxss，此处仅做 reset） */
+page {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: #0f2027;
+  overflow: hidden;
+}
