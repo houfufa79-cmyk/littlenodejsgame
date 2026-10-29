@@ -12,6 +12,52 @@
 
 'use strict';
 
+// ==========================================================================
+// 微信小游戏平台 API Shim（JSCore 环境没有这些浏览器 API，必须补齐）
+// ==========================================================================
+
+// 1. performance.now() —— 微信小游戏没有 performance 对象
+//    用 Date.now() 兜底（毫秒精度足够做 dt 计算）
+var _startTs = Date.now();
+if (typeof performance === 'undefined') {
+  var root = typeof global !== 'undefined' ? global : Function('return this')();
+  root.performance = {
+    now: function () { return Date.now() - _startTs; },
+    timing: {}
+  };
+} else if (typeof performance.now !== 'function') {
+  performance.now = function () { return Date.now() - _startTs; };
+}
+
+// 2. requestAnimationFrame / cancelAnimationFrame —— 小游戏有但老版本可能缺失
+if (typeof requestAnimationFrame === 'undefined') {
+  requestAnimationFrame = function (cb) {
+    return setTimeout(function () { cb(Date.now()); }, 1000 / 60);
+  };
+  cancelAnimationFrame = function (id) { clearTimeout(id); };
+}
+
+// 3. setTimeout / clearTimeout —— 理论上小游戏有，但经验里曾报独立错误
+if (typeof setTimeout === 'undefined') {
+  setTimeout = function (fn, delay) { return wx.setTimeout(fn, delay); };
+  clearTimeout = function (id) { wx.clearTimeout(id); };
+}
+if (typeof setInterval === 'undefined') {
+  setInterval = function (fn, delay) { return wx.setInterval(fn, delay); };
+  clearInterval = function (id) { wx.clearInterval(id); };
+}
+
+// 4. 把 setTimeout/setInterval 挂到 global 上裸标识符可解析（某些 JSCore 版本需要）
+if (typeof global !== 'undefined') {
+  if (!global.setTimeout)    global.setTimeout    = setTimeout;
+  if (!global.clearTimeout)  global.clearTimeout  = clearTimeout;
+  if (!global.setInterval)   global.setInterval   = setInterval;
+  if (!global.clearInterval) global.clearInterval = clearInterval;
+  if (!global.performance)     global.performance     = performance;
+  if (!global.requestAnimationFrame)  global.requestAnimationFrame  = requestAnimationFrame;
+  if (!global.cancelAnimationFrame)   global.cancelAnimationFrame   = cancelAnimationFrame;
+}
+
 // ---------- 常量（与 H5 完全一致） ----------
 const W = 480, H = 720;
 const CELL_W = 54, CELL_H = 46, LEG_R = 23, COLS = 8, GRID_TOP = 80;
